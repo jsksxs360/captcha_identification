@@ -5,6 +5,7 @@ import scipy
 from scipy import misc
 import numpy as np
 import os
+import re
 from keras.models import Model
 from keras.models import load_model
 import base64
@@ -54,8 +55,14 @@ def api_message():
     else:
         return json.dumps({"status":"NO", "msg":"request head not support"})
     if base64_str:
+        result = re.search("data:image/(?P<ext>.*?);base64,(?P<data>.*)", base64_str, re.DOTALL)
+        if result:
+            ext = result.groupdict().get("ext")
+            data = result.groupdict().get("data")
+        else:
+            data = src
         try:
-            imgdata = base64.b64decode(base64_str)
+            imgdata = base64.b64decode(data)
             tempfilename = str(uuid.uuid1()) + '.png'
             file = open(tempfilename,'wb')
             file.write(imgdata)
