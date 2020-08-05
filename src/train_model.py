@@ -10,7 +10,7 @@ from keras.models import Model
 from keras.callbacks import ModelCheckpoint
 from keras.callbacks import Callback
 
-data_dir = '../data/cap_data/'
+data_dir = '../data/captcha/'
 model_dir = '../model/'
 epochs = 50
 batch_size = 256
