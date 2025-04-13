@@ -80,5 +80,5 @@ def api_message():
 
 if __name__ == '__main__':
     loading() # 加载模型
-    http_server = WSGIServer(('127.0.0.1', 8090), app)
+    http_server = WSGIServer(('0.0.0.0', 8090), app)
     http_server.serve_forever()
